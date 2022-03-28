@@ -1,0 +1,8 @@
+/.idea
+/.vscode
+/.gitee
+/.svn
+/vendor
+*.log
+.env
+composer.lock

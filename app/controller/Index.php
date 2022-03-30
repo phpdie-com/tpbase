@@ -1,7 +1,9 @@
 <?php
+
 namespace app\controller;
 
 use app\BaseController;
+use app\business\LogHelper;
 
 class Index extends BaseController
 {
@@ -13,5 +15,25 @@ class Index extends BaseController
     public function hello($name = 'ThinkPHP6')
     {
         return 'hello,' . $name;
+    }
+
+    public function demo1()//闭包的使用
+    {
+        $back = function () {
+            return $this->name;
+        };
+        $log = new LogHelper();
+        echo $log->show($back);
+    }
+
+    public function demo2()//闭包的使用
+    {
+        $back = function () {
+            $this->name = 'lisi';
+        };
+        $log = new LogHelper();
+        $new_fn = $back->bindTo($log);
+        $new_fn();//调用一下
+        echo $log->out();
     }
 }

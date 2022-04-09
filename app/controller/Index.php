@@ -17,7 +17,7 @@ class Index extends BaseController
         return 'hello,' . $name;
     }
 
-    public function demo1()//闭包的使用
+    public function demo1() //闭包的使用
     {
         $back = function () {
             return $this->name;
@@ -26,14 +26,21 @@ class Index extends BaseController
         echo $log->show($back);
     }
 
-    public function demo2()//闭包的使用
+    public function demo2() //闭包的使用
     {
         $back = function () {
             $this->name = 'lisi';
         };
         $log = new LogHelper();
         $new_fn = $back->bindTo($log);
-        $new_fn();//调用一下
+        $new_fn(); //调用一下
         echo $log->out();
+    }
+
+    public function demo3() //闭包的使用
+    {
+        $log = new LogHelper();
+        $log->ggg = 'ggg';
+        halt($log);
     }
 }

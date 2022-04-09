@@ -4,12 +4,56 @@ namespace app\controller;
 
 use app\BaseController;
 use app\business\LogHelper;
+use think\facade\Db;
+use app\model\User;
 
 class Index extends BaseController
 {
-    public function index()
+    public function index()//一对一 关联修改记录
     {
-        return '<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} a{color:#2E5CD5;cursor: pointer;text-decoration: none} a:hover{text-decoration:underline; } body{ background: #fff; font-family: "Century Gothic","Microsoft yahei"; color: #333;font-size:18px;} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.6em; font-size: 42px }</style><div style="padding: 24px 48px;"> <h1>:) </h1><p> ThinkPHP V' . \think\facade\App::version() . '<br/><span style="font-size:30px;">14载初心不改 - 你值得信赖的PHP框架</span></p><span style="font-size:25px;">[ V6.0 版本由 <a href="https://www.yisu.com/" target="yisu">亿速云</a> 独家赞助发布 ]</span></div><script type="text/javascript" src="https://tajs.qq.com/stats?sId=64890268" charset="UTF-8"></script><script type="text/javascript" src="https://e.topthink.com/Public/static/client.js"></script><think id="ee9b1aa918103c4fc"></think>';
+//CREATE TABLE `user` (
+//  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+//  `name` varchar(255) DEFAULT NULL,
+//  `age` int(11) DEFAULT NULL,
+//  `sex` varchar(255) DEFAULT NULL,
+//  PRIMARY KEY (`id`)
+//) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+//CREATE TABLE `score` (
+//    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+//  `user_id` int(10) unsigned DEFAULT NULL,
+//  `subject` varchar(255) DEFAULT NULL,
+//  `score` int(10) unsigned DEFAULT NULL,
+//  PRIMARY KEY (`id`)
+//) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        $user = User::find(1);
+        $user->name = 'zhangsan';
+        $user->chengji->score = '100';
+        // 更新当前模型及关联模型
+        $user->together(['chengji'])->save();
+
+//        // 查询
+//        $user = Blog::with('chengji')->find(1);
+//        // 删除当前及关联模型
+//        $user->together(['chengji'])->delete();
+    }
+
+    public function index2()//一对多 关联新增记录
+    {
+        $user = User::find(1);
+        // 增加一个关联数据
+        $user->fenshu()->save(['subject' => 'test2', 'score' => 10]);
+        // 批量增加关联数据
+        $user->fenshu()->saveAll([
+            ['subject' => 'test3', 'score' => 30],
+            ['subject' => 'test4', 'score' => 40],
+        ]);
+    }
+
+    public function index3()//一对多 关联删除记录
+    {
+        $user = User::with('fenshu')->find(1);
+        $user->together(['fenshu'])->delete();
     }
 
     public function hello($name = 'ThinkPHP6')

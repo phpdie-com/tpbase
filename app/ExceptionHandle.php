@@ -51,6 +51,21 @@ class ExceptionHandle extends Handle
     public function render($request, Throwable $e): Response
     {
         // 添加自定义异常处理机制
+        if($e instanceof HttpResponseException){
+            return json(['message'=>$e->getMessage(),'code'=>400,'data'=>[]]);
+        }
+        if($e instanceof HttpException){
+            return json(['message'=>$e->getMessage(),'code'=>400,'data'=>[]]);
+        }
+        if($e instanceof ModelNotFoundException){
+            return json(['message'=>$e->getMessage(),'code'=>400,'data'=>[]]);
+        }
+        if($e instanceof DataNotFoundException){
+            return json(['message'=>$e->getMessage(),'code'=>400,'data'=>[]]);
+        }
+        if($e instanceof ValidateException){
+            return json(['message'=>$e->getMessage(),'code'=>400,'data'=>[]]);
+        }
 
         // 其他错误交给系统处理
         return parent::render($request, $e);

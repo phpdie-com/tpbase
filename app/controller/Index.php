@@ -87,4 +87,10 @@ class Index extends BaseController
         $log->ggg = 'ggg';
         halt($log);
     }
+
+    public function demo4() //测试异常处理
+    {
+        $find=User::find(1);
+        return json(['message'=>'success','code'=>200,'data'=>$find]);
+    }
 }

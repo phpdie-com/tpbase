@@ -11,6 +11,12 @@ class Index extends BaseController
 {
     public function index()//一对一 关联修改记录
     {
+        $target = date_create('2009-10-11 13:23:59');
+        $origin = date_create('2009-10-13 15:12:59');
+        $interval = date_diff($origin, $target);
+        echo $interval->format('%a天%h小时');
+
+        exit;
 //CREATE TABLE `user` (
 //  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 //  `name` varchar(255) DEFAULT NULL,
@@ -90,7 +96,7 @@ class Index extends BaseController
 
     public function demo4() //测试异常处理
     {
-        $find=User::find(1);
-        return json(['message'=>'success','code'=>200,'data'=>$find]);
+        $find = User::find(1);
+        return json(['message' => 'success', 'code' => 200, 'data' => $find]);
     }
 }

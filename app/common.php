@@ -29,3 +29,35 @@ if (!function_exists('blank')) {
         return empty($value);
     }
 }
+
+if (!function_exists('success_json')) {
+    /** 成功信息返回
+     * @param array $arr
+     * @return \think\response\Json
+     */
+    function success_json(array $arr = []): \think\response\Json
+    {
+        $default = [
+            'code' => 1,
+            'message' => 'success',
+            'data' => [],
+        ];
+        return json(array_merge($default, $arr));
+    }
+}
+
+if (!function_exists('error_json')) {
+    /** 失败信息返回
+     * @param array $arr
+     * @return \think\response\Json
+     */
+    function error_json(array $arr = []): \think\response\Json
+    {
+        $default = [
+            'code' => 0,
+            'message' => 'fail',
+            'data' => [],
+        ];
+        return json(array_merge($default, $arr));
+    }
+}

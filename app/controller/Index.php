@@ -9,7 +9,12 @@ use app\model\User;
 
 class Index extends BaseController
 {
-    public function index()//一对一 关联修改记录
+    public function index()
+    {
+
+    }
+
+    public function index1()//一对一 关联修改记录
     {
         echo 3 / 0;
         exit;
@@ -101,5 +106,20 @@ class Index extends BaseController
 //        $find = User::cache(60)->find(1);
         $find = Db::name('user')->find(1);
         halt($find);
+    }
+
+    public function demo6()
+    {
+        Db::event('baozha', function () {
+            echo 'hehe beng!';
+        });
+        Db::trigger('baozha');
+    }
+
+    public function demo7()//自动识别是插入还是更新，$data里要包含主键字段
+    {
+        $data = ['name' => input('name', 'zhangsan')];
+        if (input('id')) $data['id'] = input('id');
+        Db::name('user')->save($data);//不能用模型方法 模型方法会调用Model类里面的save方法，必须用db方法才会返回Query对象
     }
 }

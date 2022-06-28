@@ -8,7 +8,7 @@ use think\Model;
 /**
  * @mixin \think\Model
  */
-class User extends Model
+class User extends BaseModel
 {
     public function chengji()
     {

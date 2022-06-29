@@ -11,6 +11,7 @@ class Index extends BaseController
 {
     public function index()
     {
+        
     }
 
     public function index1()//一对一 关联修改记录
@@ -209,5 +210,20 @@ class Index extends BaseController
         $queryField = "'" . implode(',', $insertField) . "'";//查询的字段
         $insertTable = 't_user';
         User::getInstance()->field($queryField)->whereIn('id', [2, 3])->selectInsert($insertField, $insertTable);
+    }
+
+    public function demo14()//模型属性的运用
+    {
+        $result = User::where('id', '>', 2)->withAttr('sex', function ($sex) {
+            if ($sex == 1) return '男';
+            if ($sex == 2) return '女';
+            return '保密';
+        })->select()->toArray();
+        halt($result);
+
+//        下面两个结果是等效的，不过还是觉得with好用一些
+//        $result = User::whereIn('id', [2, 3])->append(['fenshu.score'])->select()->toArray();
+//        $result = User::whereIn('id', [2, 3])->with(['fenshu'])->select()->toArray();
+//        halt($result);
     }
 }

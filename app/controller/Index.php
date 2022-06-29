@@ -11,10 +11,6 @@ class Index extends BaseController
 {
     public function index()
     {
-        $user = User::find(2);
-        $user->name = 'thinkphp1122';
-        $user->age = 22;
-        $user->allowField(['name'])->save();
     }
 
     public function index1()//一对一 关联修改记录
@@ -147,11 +143,46 @@ class Index extends BaseController
         $user->save();
     }
 
-    public function demo10()//存在即更新，会根据主键查找，如果数据库不存在则会插入记录，存在会更新 。官方推荐的最佳更新方式
+    public function demo10()//最佳更新方法。 会根据主键查找，如果数据库不存在则会插入记录，存在会更新 。官方推荐的最佳更新方式
     {
+        //单条记录更新
         $user = User::find(2);
         $user->name = 'thinkphp';
         $user->age = 110;
         $user->allowField(['name'])->save();//只允许name字段被更新 当然如果设置了自动写入时间字段，时间更新字段还是能更新到的
+        //批量更新
+        $user = new User;
+        $list = [
+            ['id' => 1, 'name' => 'thinkphp', 'age' => 12],
+            ['id' => 2, 'name' => 'onethink', 'age' => 12]
+        ];
+        $user->saveAll($list);//批量更新仅能根据主键值进行更新，其它情况请自行处理。
+        //静态方法更新数据
+        $set = ['name' => 'aa'];
+        $where = [['id', '>', 2]];
+        $user = User::update($set, $where);
+    }
+
+    public function demo11()//最佳写入方法。 saveAll方法新增数据返回的是包含新增模型（带自增ID）的数据集对象
+    {
+        //单条记录写入
+        $user = User::create([
+            'name' => 'thinkphp',
+            'age' => 20
+        ]);
+        echo $user->id; // 获取自增ID
+        //批量写入
+        $user = new User;
+        $list = [
+            ['name' => 'thinkphp', 'age' => 12],
+            ['name' => 'onethink', 'age' => 13]
+        ];
+        $result = $user->saveAll($list);
+        halt($result->toArray());
+    }
+
+    public function demo12()
+    {
+
     }
 }

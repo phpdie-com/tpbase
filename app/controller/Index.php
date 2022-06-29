@@ -116,7 +116,7 @@ class Index extends BaseController
         Db::trigger('baozha');
     }
 
-    public function demo7()//自动识别是插入还是更新，$data里要包含主键字段
+    public function demo7()//自动识别是插入还是更新，$data里有主键 就是更新 没有就是插入
     {
         $data = ['name' => input('name', 'zhangsan')];
         if (input('id')) $data['id'] = input('id');

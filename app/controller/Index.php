@@ -11,14 +11,14 @@ class Index extends BaseController
 {
     public function index()
     {
-        
+
     }
 
     public function index1()//一对一 关联修改记录
     {
         echo 3 / 0;
         exit;
-//CREATE TABLE `user` (
+//CREATE TABLE `t_user` (
 //  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 //  `name` varchar(255) DEFAULT NULL,
 //  `age` int(11) DEFAULT NULL,
@@ -26,7 +26,7 @@ class Index extends BaseController
 //  PRIMARY KEY (`id`)
 //) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-//CREATE TABLE `score` (
+//CREATE TABLE `t_score` (
 //    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 //  `user_id` int(10) unsigned DEFAULT NULL,
 //  `subject` varchar(255) DEFAULT NULL,

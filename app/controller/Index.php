@@ -120,7 +120,7 @@ class Index extends BaseController
     {
         $data = ['name' => input('name', 'zhangsan')];
         if (input('id')) $data['id'] = input('id');
-        Db::name('user')->save($data);//不能用模型方法 模型方法会调用Model类里面的save方法，必须用db方法才会返回Query对象
+        Db::name('user')->save($data);//不能用模型方法 模型方法会调用Model类里面的save方法，会报主键重复的错误，必须用db方法才会返回Query对象
     }
 
     public function demo8()//存在即更新,这里的name要设置为唯一索引

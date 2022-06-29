@@ -11,7 +11,8 @@ class Index extends BaseController
 {
     public function index()
     {
-
+        $user = User::getInstance()->find(4);
+        print_r($user->toArray());
     }
 
     public function index1()//一对一 关联修改记录
@@ -123,7 +124,7 @@ class Index extends BaseController
         Db::name('user')->save($data);//不能用模型方法 模型方法会调用Model类里面的save方法，必须用db方法才会返回Query对象
     }
 
-    public function demo8()//存在即更新
+    public function demo8()//存在即更新,这里的name要设置为唯一索引
     {
         $insert = ['name' => 'zhangwuji'];
         $existsUpdate = ['name' => '张无忌'];//如果要插入的$insert存在于数据库则用$existsUpdate更新

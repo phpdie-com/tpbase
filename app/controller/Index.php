@@ -181,8 +181,25 @@ class Index extends BaseController
         halt($result->toArray());
     }
 
-    public function demo12()
+    public function demo12()//软删除
     {
+        User::destroy(13);
+        $result = User::find(13);//不能查到
+        //$result = Db::name('user')->where('id', 13)->find();//能查到
+        //dump($result);
 
+        //查出包含软删除的记录
+        $result1 = User::withTrashed()->find(13);
+        $result2 = User::withTrashed()->select();
+        //dump($result1);
+
+        //仅仅查询软删除的记录
+        $result3 = User::onlyTrashed()->find(13);
+        $result4 = User::onlyTrashed()->select();
+        //dump($result4);
+
+        //恢复被软删除的数据
+        $user = User::onlyTrashed()->find(13);//不能用select，不能恢复一个列表，只能恢复一条
+        $user->restore();
     }
 }

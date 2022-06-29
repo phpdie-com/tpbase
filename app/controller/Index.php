@@ -122,4 +122,18 @@ class Index extends BaseController
         if (input('id')) $data['id'] = input('id');
         Db::name('user')->save($data);//不能用模型方法 模型方法会调用Model类里面的save方法，必须用db方法才会返回Query对象
     }
+
+    public function demo8()//存在即更新
+    {
+        $insert = ['name' => 'zhangwuji'];
+        $existsUpdate = ['name' => '张无忌'];//如果要插入的$insert存在于数据库则用$existsUpdate更新
+        $result = Db::name('user')->duplicate($existsUpdate)->insert($insert);
+        if ($result === 1) {
+            echo '不存在插入成功';
+        }
+        if ($result === 2) {
+            echo '更新成功返回';
+        }
+        print_r($result);
+    }
 }

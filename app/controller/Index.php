@@ -11,8 +11,10 @@ class Index extends BaseController
 {
     public function index()
     {
-        $user = User::getInstance()->find(4);
-        print_r($user->toArray());
+        $user = User::find(2);
+        $user->name = 'thinkphp1122';
+        $user->age = 22;
+        $user->allowField(['name'])->save();
     }
 
     public function index1()//一对一 关联修改记录
@@ -136,5 +138,20 @@ class Index extends BaseController
             echo '更新成功返回';
         }
         print_r($result);
+    }
+
+    public function demo9()//自动写入时间.要用save方法才有效果 Db的insert和模型的insert不起作用   datebase.php修改 'auto_timestamp'  => 'timestamp',
+    {
+        $user = new User();
+        $user->name = 'thinkphp';
+        $user->save();
+    }
+
+    public function demo10()//存在即更新，会根据主键查找，如果数据库不存在则会插入记录，存在会更新 。官方推荐的最佳更新方式
+    {
+        $user = User::find(2);
+        $user->name = 'thinkphp';
+        $user->age = 110;
+        $user->allowField(['name'])->save();//只允许name字段被更新 当然如果设置了自动写入时间字段，时间更新字段还是能更新到的
     }
 }

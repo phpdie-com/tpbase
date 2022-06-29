@@ -202,4 +202,12 @@ class Index extends BaseController
         $user = User::onlyTrashed()->find(13);//不能用select，不能恢复一个列表，只能恢复一条
         $user->restore();
     }
+
+    public function demo13()//查询到数据并插入到表
+    {
+        $insertField = ['name', 'age', 'sex'];//插入的字段名
+        $queryField = "'" . implode(',', $insertField) . "'";//查询的字段
+        $insertTable = 't_user';
+        User::getInstance()->field($queryField)->whereIn('id', [2, 3])->selectInsert($insertField, $insertTable);
+    }
 }

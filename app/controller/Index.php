@@ -4,8 +4,8 @@ namespace app\controller;
 
 use app\BaseController;
 use app\business\LogHelper;
-use think\facade\Db;
 use app\model\User;
+use think\facade\Db;
 
 class Index extends BaseController
 {

@@ -6,7 +6,7 @@ namespace app\model;
 use think\Model;
 
 /**
- * @mixin \think\Model
+ * @mixin Model
  */
 class BaseModel extends Model
 {

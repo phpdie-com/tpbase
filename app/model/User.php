@@ -7,7 +7,7 @@ use think\Model;
 use think\model\concern\SoftDelete;
 
 /**
- * @mixin \think\Model
+ * @mixin Model
  */
 class User extends BaseModel
 {

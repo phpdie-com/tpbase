@@ -17,9 +17,9 @@ class BaseModel extends Model
      */
     public static function getInstance()
     {
-        if (static::$instance) {
-            return static::$instance;
+        if (is_null(static::$instance)) {
+            static::$instance = new static;
         }
-        return new static();
+        return static::$instance;
     }
 }

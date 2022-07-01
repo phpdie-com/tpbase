@@ -11,9 +11,6 @@ class Index extends BaseController
 {
     public function index()
     {
-        $a = User::getInstance()->where('id', 3);
-        $b = User::getInstance()->where('id', 3);
-        dump($a, $b);
     }
 
     public function index1()//一对一 关联修改记录

@@ -11,8 +11,8 @@ class Index extends BaseController
 {
     public function index()
     {
-        $a = User::getInstance();
-        $b = User::getInstance();
+        $a = User::getInstance()->where('id', 3);
+        $b = User::getInstance()->where('id', 3);
         dump($a, $b);
     }
 

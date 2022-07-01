@@ -46,7 +46,7 @@ $methods = $class->getMethods();
 $attr = $class->getProperties();
 //var_dump($attr);//获取所有成员属性，包含私有的属性
 $attr_value = $class->getProperty('p1');
-//var_dump($attr_value);//获取具体的成员属性值和属性名（这个是个奇葩，并不是单纯的返回属性值）
+//var_dump($attr_value);//获取具体的成员属性值和属性名(非静态属性并没有提供根据数据名获取属性值的方法)
 $attr_static = $class->getStaticProperties();
 //var_dump($attr_static);//获取静态属性
 $attr_static_value = $class->getStaticPropertyValue('p3');

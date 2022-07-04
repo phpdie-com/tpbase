@@ -22,5 +22,8 @@ class DemoTask extends Task
     {
 //...具体的任务执行
         Log::write(date('Y-m-d ') . '执行了定时任务');
+        //说明：经测试在linux下能正常定期执行，测试环境为docker（dnmp一键安装包搭建的）
+        //执行 php think cron:schedule >/dev/null 2>&1 &
+        //要检测是否运行了上面的命令可以用命令看 sudo docker exec php80 ps -a|grep "php think cron:schedule"
     }
 }

@@ -10,16 +10,16 @@ use think\Model;
  */
 class BaseModel extends Model
 {
-    protected static $instance;
+    protected static $instance;//子类也需要有此静态变量
 
     /** 获取单例
      * @return static
      */
     public static function getInstance()
     {
-        if (static::$instance) {
-            return static::$instance;
+        if (is_null(static::$instance) || !static::$instance instanceof static) {
+            static::$instance = new static;
         }
-        return new static();
+        return static::$instance;
     }
 }

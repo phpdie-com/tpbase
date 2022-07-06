@@ -6,3 +6,6 @@
 *.log
 .env
 composer.lock
+.buildpath
+.project
+.settings

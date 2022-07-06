@@ -6,3 +6,8 @@
 *.log
 .env
 composer.lock
+
+#Eclipse IDE生成的文件
+.buildpath
+.project
+.settings

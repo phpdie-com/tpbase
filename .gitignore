@@ -11,3 +11,7 @@ composer.lock
 .buildpath
 .project
 .settings
+/nbproject/private/
+
+#NetBeans IDE生成的文件
+nbproject
